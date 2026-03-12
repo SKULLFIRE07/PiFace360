@@ -1,0 +1,43 @@
+# PiFace Attendance System - Python Dependencies
+# Install: pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple
+
+# Web framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+aiofiles>=23.2.1
+jinja2>=3.1.2
+
+# Database
+sqlalchemy>=2.0.23
+
+# Auth & Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+httpx>=0.25.0
+
+# Computer Vision & AI
+opencv-python-headless>=4.8.0
+numpy>=1.26.0
+insightface>=0.7.3
+onnxruntime>=1.16.0
+
+# Scientific computing (Hungarian algorithm for tracking)
+scipy>=1.11.0
+
+# GPIO (Pi 5 compatible)
+gpiozero>=2.0
+lgpio>=0.2
+
+# Reports
+openpyxl>=3.1.2
+reportlab>=4.0.0
+
+# Camera (Pi-specific, install separately on Pi)
+# picamera2  # installed via apt on Raspberry Pi OS
+
+# System integration
+# systemd-python  # optional, for sd_notify watchdog
+
+# Image processing
+Pillow>=10.0.0

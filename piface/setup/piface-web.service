@@ -1,0 +1,27 @@
+[Unit]
+Description=PiFace Web API Server
+After=piface-leds.service
+Wants=piface-leds.service
+
+[Service]
+Type=notify
+ExecStart=/opt/piface/venv/bin/uvicorn piface.backend.main:app --uds /run/piface/web.sock --workers 1 --log-level warning
+Restart=always
+RestartSec=5
+User=piface
+Group=piface
+SupplementaryGroups=gpio
+WatchdogSec=30
+TimeoutStopSec=15
+CPUAffinity=2
+Nice=-2
+MemoryMax=1G
+Environment=PYTHONPATH=/opt
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/piface/database /opt/piface/snapshots /opt/piface/reports /opt/piface/backups /var/log/piface /run/piface
+RuntimeDirectory=piface
+
+[Install]
+WantedBy=multi-user.target

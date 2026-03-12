@@ -1,0 +1,29 @@
+[Unit]
+Description=PiFace Face Engine
+After=piface-leds.service
+Wants=piface-leds.service
+
+[Service]
+Type=notify
+ExecStart=/opt/piface/venv/bin/python -m piface.core.face_engine
+Restart=always
+RestartSec=5
+User=piface
+Group=piface
+SupplementaryGroups=gpio video
+WatchdogSec=30
+TimeoutStopSec=15
+CPUAffinity=0 1
+Nice=-5
+MemoryMax=3G
+Environment=OMP_NUM_THREADS=2
+Environment=OPENBLAS_NUM_THREADS=2
+Environment=PYTHONPATH=/opt
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/piface/database /opt/piface/snapshots /var/log/piface /run/piface
+RuntimeDirectory=piface
+
+[Install]
+WantedBy=multi-user.target

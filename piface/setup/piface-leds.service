@@ -1,0 +1,27 @@
+[Unit]
+Description=PiFace LED Controller
+After=network.target
+
+[Service]
+Type=notify
+ExecStartPre=-/bin/rm -f /run/piface/leds.sock
+ExecStart=/opt/piface/venv/bin/python -m piface.core.led_controller
+Restart=always
+RestartSec=5
+User=piface
+Group=piface
+SupplementaryGroups=gpio
+WatchdogSec=30
+TimeoutStopSec=15
+CPUAffinity=3
+Nice=-2
+MemoryMax=512M
+Environment=PYTHONPATH=/opt
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/log/piface /run/piface
+RuntimeDirectory=piface
+
+[Install]
+WantedBy=multi-user.target
