@@ -37,7 +37,7 @@ reportlab>=4.0.0
 # picamera2  # installed via apt on Raspberry Pi OS
 
 # System integration
-# systemd-python  # optional, for sd_notify watchdog
+sdnotify>=0.3.0
 
 # Image processing
 Pillow>=10.0.0

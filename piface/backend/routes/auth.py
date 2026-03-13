@@ -61,12 +61,15 @@ def login(
     # Create JWT
     token = create_access_token({"sub": user.username, "role": user.role})
 
-    # Set httpOnly + Secure + SameSite=Strict cookie
+    # Set httpOnly + SameSite cookie
+    # secure=True requires HTTPS (nginx handles TLS in production)
+    import os
+    is_production = os.environ.get("PIFACE_ENV") == "production"
     response.set_cookie(
         key="access_token",
         value=token,
         httponly=True,
-        secure=False,
+        secure=is_production,
         samesite="lax",
         path="/",
     )

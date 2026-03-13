@@ -5,6 +5,7 @@ Wants=piface-leds.service
 
 [Service]
 Type=notify
+ExecStartPre=-/bin/rm -f /run/piface/web.sock
 ExecStart=/opt/piface/venv/bin/uvicorn piface.backend.main:app --uds /run/piface/web.sock --workers 1 --log-level warning
 Restart=always
 RestartSec=5
@@ -17,6 +18,7 @@ CPUAffinity=2
 Nice=-2
 MemoryMax=1G
 Environment=PYTHONPATH=/opt
+Environment=PIFACE_ENV=production
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=yes
